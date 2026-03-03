@@ -1,0 +1,24 @@
+<section class="section how-it-works-section">
+    <div class="container-section">
+        <div class="section-header">
+            <h2 class="section-title">how_it_works()</h2>
+            <p class="section-subtitle">// three simple steps to create animations</p>
+        </div>
+
+        <div class="steps-grid">
+            @for (step of steps; track step.step; let i = $index) {
+            <div class="card step-card" [style.animation-delay]="(i * 0.1) + 's'">
+                <div class="step-number">// step {{ step.step }}</div>
+                <h3 class="step-title">{{ step.title }}</h3>
+                <p class="step-description">{{ step.description }}</p>
+                <div class="step-indicator">
+                    <div class="indicator-dot"></div>
+                    @if (i < steps.length - 1) { <div class="indicator-line">
+                </div>
+                }
+            </div>
+        </div>
+        }
+    </div>
+    </div>
+</section>

@@ -1,0 +1,136 @@
+@if (showLoginModal()) {
+<app-login-modal (close)="onLoginClose()"></app-login-modal>
+}
+
+@if (authenticated()) {
+<div class="chat-layout">
+    <!-- Header -->
+    <div class="chat-header">
+        <div class="header-left">
+            <div class="avatar avatar-bot">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 8V4H8" />
+                    <rect width="16" height="12" x="4" y="8" rx="2" />
+                    <path d="M2 14h2" />
+                    <path d="M20 14h2" />
+                    <path d="M15 13v2" />
+                    <path d="M9 13v2" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="header-title">AI Animation Studio</h1>
+                <p class="header-subtitle">Create stunning animations with AI</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <span class="badge">{{ displayName() }}</span>
+            <span class="badge badge-outline">{{ messages().length }} messages</span>
+            <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" #chatContainer>
+        <div class="messages-inner">
+            @for (msg of messages(); track msg.id) {
+            <div class="message-row" [class.user]="msg.type === 'user'">
+                <!-- Avatar -->
+                <div class="avatar" [class.avatar-user]="msg.type === 'user'" [class.avatar-bot]="msg.type === 'ai'">
+                    @if (msg.type === 'user') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    } @else {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 8V4H8" />
+                        <rect width="16" height="12" x="4" y="8" rx="2" />
+                        <path d="M2 14h2" />
+                        <path d="M20 14h2" />
+                        <path d="M15 13v2" />
+                        <path d="M9 13v2" />
+                    </svg>
+                    }
+                </div>
+
+                <!-- Message Content -->
+                <div class="message-content" [class.align-right]="msg.type === 'user'">
+                    <div class="message-meta">
+                        <span class="meta-name">{{ msg.type === 'user' ? 'You' : 'AI Assistant' }}</span>
+                        <span class="meta-time">{{ formatTime(msg.timestamp) }}</span>
+                    </div>
+
+                    <div class="message-card" [class.user-card]="msg.type === 'user'"
+                        [class.ai-card]="msg.type === 'ai'">
+                        @if (msg.isLoading) {
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <span>{{ msg.content }}</span>
+                        </div>
+                        } @else {
+                        <div class="message-text">{{ msg.content }}</div>
+                        }
+
+                        @if (msg.videoUrl) {
+                        <div class="video-section">
+                            <div class="video-divider"></div>
+                            <div class="video-wrapper">
+                                <video controls class="video-player">
+                                    <source [src]="msg.videoUrl" type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-actions">
+                                <a [href]="msg.videoUrl" download class="btn btn-outline btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="7 10 12 15 17 10" />
+                                        <line x1="12" y1="15" x2="12" y2="3" />
+                                    </svg>
+                                    Download MP4
+                                </a>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+            <div #messagesEnd></div>
+        </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-bar">
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea class="input textarea"
+                    placeholder="Describe your animation... (e.g., 'generate a moving circle converting square')"
+                    [ngModel]="input()" (ngModelChange)="input.set($event)" (keydown)="handleKeyDown($event)"
+                    [disabled]="isGenerating()" rows="3"></textarea>
+                <button class="send-btn" (click)="handleSend()" [disabled]="!input().trim() || isGenerating()">
+                    @if (isGenerating()) {
+                    <div class="spinner-small"></div>
+                    } @else {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    }
+                </button>
+            </div>
+            <div class="input-hint">
+                <span>Press Enter to send, Shift+Enter for new line</span>
+                <span [class.text-danger]="input().length > 500">{{ input().length }}/1000</span>
+            </div>
+        </div>
+    </div>
+</div>
+}

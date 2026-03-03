@@ -1,0 +1,24 @@
+<section class="section testimonials-section">
+    <div class="container-section">
+        <div class="section-header">
+            <h2 class="section-title">testimonials()</h2>
+            <p class="section-subtitle">// what users are saying</p>
+        </div>
+
+        <div class="testimonials-grid">
+            @for (t of testimonials; track t.name; let i = $index) {
+            <div class="card testimonial-card" [style.animation-delay]="(i * 0.1) + 's'">
+                <div class="review-label">// review</div>
+                <p class="testimonial-content">"{{ t.content }}"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">{{ t.avatar }}</div>
+                    <div>
+                        <div class="author-name">{{ t.name }}</div>
+                        <div class="author-role">{{ t.role }}</div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

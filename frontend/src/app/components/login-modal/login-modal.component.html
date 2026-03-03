@@ -1,0 +1,26 @@
+<div class="overlay animate-fade-in" (click)="onOverlayClick($event)">
+    <div class="modal">
+        <!-- Header -->
+        <div class="modal-header">
+            <h1 class="modal-title">Sign In to Animagic</h1>
+            <button class="close-btn" (click)="onClose()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="modal-divider"></div>
+
+        <!-- Description -->
+        <p class="modal-description">// authenticate to start creating animations</p>
+
+        <!-- Sign-in Button -->
+        <button class="login-btn" (click)="onLogin()">
+            login_user()
+        </button>
+    </div>
+</div>

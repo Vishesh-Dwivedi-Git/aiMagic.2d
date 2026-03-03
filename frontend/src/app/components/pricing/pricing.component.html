@@ -1,0 +1,43 @@
+<section id="pricing" class="section pricing-section">
+    <div class="container-section">
+        <div class="section-header">
+            <h2 class="section-title">pricing()</h2>
+            <p class="section-subtitle">// transparent pricing for every use case</p>
+        </div>
+
+        <div class="pricing-grid">
+            @for (plan of plans; track plan.name; let i = $index) {
+            <div class="pricing-card" [class.popular]="plan.popular" [style.animation-delay]="(i * 0.1) + 's'">
+                @if (plan.popular) {
+                <div class="popular-badge">// most popular</div>
+                }
+
+                <div class="plan-header">
+                    <div class="plan-description">// {{ plan.description }}</div>
+                    <h3 class="plan-name">{{ plan.name }}</h3>
+                    <div class="plan-price">
+                        <span class="price-amount">{{ plan.price }}</span>
+                        @if (plan.period) {
+                        <span class="price-period">{{ plan.period }}</span>
+                        }
+                    </div>
+                </div>
+
+                <ul class="plan-features">
+                    @for (feature of plan.features; track feature) {
+                    <li class="feature-item">
+                        <span class="feature-dot">•</span>
+                        <span>{{ feature }}</span>
+                    </li>
+                    }
+                </ul>
+
+                <button class="btn plan-cta" [class.btn-inverted]="plan.popular" [class.btn-primary]="!plan.popular"
+                    (click)="onPlanClick(plan)">
+                    {{ plan.cta }}
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,58 @@
+<section id="preview" class="section preview-section">
+    <div class="container-section">
+        <div class="section-header">
+            <h2 class="section-title">interface()</h2>
+            <p class="section-subtitle">// clean chat-based animation creation</p>
+        </div>
+
+        <div class="preview-card">
+            <div class="preview-layout">
+                <!-- Sidebar -->
+                <div class="preview-sidebar">
+                    <div class="sidebar-label">// navigation</div>
+                    <div class="sidebar-item active">my_animations</div>
+                    <div class="sidebar-item">styles</div>
+                    <div class="sidebar-item">templates</div>
+                    <div class="sidebar-item">settings</div>
+                </div>
+
+                <!-- Chat Area -->
+                <div class="preview-chat">
+                    <div class="chat-messages">
+                        <!-- User Message -->
+                        <div class="message-row user">
+                            <div class="message-bubble user-bubble">
+                                create a sunset scene with a running fox
+                            </div>
+                        </div>
+
+                        <!-- AI Response -->
+                        <div class="message-row ai">
+                            <div class="message-bubble ai-bubble">
+                                <p class="ai-text">generating animation...</p>
+
+                                <div class="video-placeholder">
+                                    <div class="placeholder-icon"></div>
+                                    <p>animation_preview.mp4</p>
+                                </div>
+
+                                <div class="message-actions">
+                                    <button class="btn btn-outline btn-sm">regenerate</button>
+                                    <button class="btn btn-primary btn-sm">download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="chat-input-area">
+                        <div class="input-row">
+                            <input type="text" class="input" placeholder="describe_your_animation()" readonly />
+                            <button class="btn btn-primary" (click)="loginClick.emit()">send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

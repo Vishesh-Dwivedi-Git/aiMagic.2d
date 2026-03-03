@@ -1,0 +1,52 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-inner">
+            <!-- Logo -->
+            <a href="/" class="logo">[aiMagic.2D]</a>
+
+            <!-- Desktop Nav -->
+            <div class="desktop-nav">
+                @for (link of navLinks; track link.name) {
+                @if (isFragment(link.href)) {
+                <a [href]="link.href" class="nav-link">{{ link.name }}</a>
+                } @else {
+                <a [routerLink]="link.href" class="nav-link">{{ link.name }}</a>
+                }
+                }
+                <button class="btn btn-primary" (click)="onLoginClick()">get_started</button>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" (click)="toggleMenu()">
+                @if (isOpen()) {
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                }
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        @if (isOpen()) {
+        <div class="mobile-menu animate-fade-in">
+            @for (link of navLinks; track link.name) {
+            @if (isFragment(link.href)) {
+            <a [href]="link.href" class="mobile-link" (click)="closeMenu()">{{ link.name }}</a>
+            } @else {
+            <a [routerLink]="link.href" class="mobile-link" (click)="closeMenu()">{{ link.name }}</a>
+            }
+            }
+            <button class="btn btn-primary mobile-cta" (click)="onLoginClick()">get_started</button>
+        </div>
+        }
+    </div>
+</nav>

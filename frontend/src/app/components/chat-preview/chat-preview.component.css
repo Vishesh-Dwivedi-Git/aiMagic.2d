@@ -1,0 +1,144 @@
+.preview-section {
+    background: var(--bg-primary);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.preview-card {
+    background: #111827;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.preview-layout {
+    display: flex;
+    height: 500px;
+}
+
+.preview-sidebar {
+    width: 16rem;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-default);
+    padding: 1rem;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .preview-sidebar {
+        display: block;
+    }
+}
+
+.sidebar-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.sidebar-item {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar-item:hover {
+    color: white;
+    background: #1f2937;
+}
+
+.sidebar-item.active {
+    color: white;
+    background: #1f2937;
+}
+
+.preview-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+}
+
+.message-row {
+    display: flex;
+}
+
+.message-row.user {
+    justify-content: flex-end;
+}
+
+.message-row.ai {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 28rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+}
+
+.user-bubble {
+    background: white;
+    color: black;
+}
+
+.ai-bubble {
+    background: #1f2937;
+    color: white;
+}
+
+.ai-text {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.video-placeholder {
+    background: #374151;
+    height: 8rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.placeholder-icon {
+    width: 2rem;
+    height: 2rem;
+    background: #4b5563;
+    border-radius: var(--radius-md);
+    margin-bottom: 0.5rem;
+}
+
+.message-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input-area {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-default);
+}
+
+.input-row {
+    display: flex;
+    gap: 0.5rem;
+}

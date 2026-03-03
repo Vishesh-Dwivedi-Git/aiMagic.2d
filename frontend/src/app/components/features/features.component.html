@@ -1,0 +1,18 @@
+<section id="features" class="section features-section">
+    <div class="container-section">
+        <div class="section-header">
+            <h2 class="section-title">features()</h2>
+            <p class="section-subtitle">// everything you need for ai animation</p>
+        </div>
+
+        <div class="features-grid">
+            @for (feature of features; track feature.title; let i = $index) {
+            <div class="card feature-card" [style.animation-delay]="(i * 0.08) + 's'">
+                <div class="feature-icon">{{ feature.icon }}</div>
+                <h3 class="feature-title">{{ feature.title }}</h3>
+                <p class="feature-description">{{ feature.description }}</p>
+            </div>
+            }
+        </div>
+    </div>
+</section>
